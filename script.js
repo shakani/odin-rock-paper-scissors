@@ -12,7 +12,7 @@ function getComputerChoice() {
 }
 
 function toSentenceCase(s) {
-    return s[0].toUpperCase() + s.splice(1).toLowerCase();
+    return s[0].toUpperCase() + s.slice(1).toLowerCase();
 }
 
 function playRound(ps, computerSelection) {
@@ -21,7 +21,7 @@ function playRound(ps, computerSelection) {
     let win = false;
 
     if (playerSelection === computerSelection) {
-        return 'Tie!';
+        return 'Tie! ';
     }
     
     // Win conditions
@@ -43,6 +43,29 @@ function playRound(ps, computerSelection) {
     }
 }
 
-const playerSelection = 'rock';
-const computerSelection = getComputerChoice();
-console.log(playRound(playerSelection, computerSelection));
+function game() {
+    let score = 0;
+    for(let i = 0; i < 5; i++) {
+        let computerSelection = getComputerChoice();
+        let playerSelection = prompt('Rock, paper, or scissors?');
+        let result = playRound(playerSelection, computerSelection);
+        console.log(result);
+        if(result[4] === 'w') {
+            score += 1;
+        }
+    }
+    if(score >= 3) {
+        console.log('You win the match!!!');
+    }
+    else {
+        console.log('You lose the match!!!');
+    }
+    console.log('Final score: ' + score);
+}
+
+game();
+
+// const playerSelection = 'rock';
+// const computerSelection = getComputerChoice();
+// console.log(playerSelection, computerSelection);
+// console.log(playRound(playerSelection, computerSelection));
