@@ -65,11 +65,21 @@ function game() {
 
 // Event listeners
 const buttons = document.querySelectorAll('button');
+
 buttons.forEach((button) => {
     button.addEventListener('click', () => {
-        alert(button.id);
+        computerSelection = getComputerChoice();
+        playerSelection = button.id;
+        console.log(playRound(playerSelection, computerSelection));
     });
 });
+
+// score-keeping
+const playerScore = document.querySelector('div.player');
+const computerScore = document.querySelector('div.computer');
+
+playerScore.textContent = 'Player: 0';
+computerScore.textContent = 'Computer: 0';
 
 // game();
 
