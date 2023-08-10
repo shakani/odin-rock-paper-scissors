@@ -63,7 +63,15 @@ function game() {
     console.log('Final score: ' + score);
 }
 
-game();
+// Event listeners
+const buttons = document.querySelectorAll('button');
+buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+        alert(button.id);
+    });
+});
+
+// game();
 
 // const playerSelection = 'rock';
 // const computerSelection = getComputerChoice();
