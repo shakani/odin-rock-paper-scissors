@@ -63,6 +63,15 @@ function game() {
     console.log('Final score: ' + score);
 }
 
+// score-keeping
+const playerScore = document.querySelector('div.player');
+const computerScore = document.querySelector('div.computer');
+const tieScore = document.querySelector('div.ties');
+
+playerScore.textContent = 'Player: 0';
+computerScore.textContent = 'Computer: 0';
+tieScore.textContent = 'Ties: 0';
+
 // Event listeners
 const buttons = document.querySelectorAll('button');
 
@@ -70,16 +79,40 @@ buttons.forEach((button) => {
     button.addEventListener('click', () => {
         computerSelection = getComputerChoice();
         playerSelection = button.id;
-        console.log(playRound(playerSelection, computerSelection));
+        let outcome = playRound(playerSelection, computerSelection); 
+        console.log(outcome);
+        if (outcome[4] === 'w') { // player wins; update score
+            // last character of score string is current score; parse to int
+            let scoreNow = parseInt(playerScore.textContent.slice(-1)); 
+            scoreNow += 1;
+            if (scoreNow === 5) { // game over
+                alert('You win the match!');
+                playerScore.textContent = `Player: 0`;
+                computerScore.textContent = `Computer: 0`;
+                tieScore.textContent = `Ties: 0`;
+            }
+            else {
+                playerScore.textContent = `Player: ${scoreNow}`;
+            }
+        }
+        else if(outcome[4] == 'l') {
+            let scoreNow = parseInt(computerScore.textContent.slice(-1)); 
+            scoreNow += 1;
+            if (scoreNow === 5) {
+                alert('You lose the match!');
+                playerScore.textContent = `Player: 0`;
+                computerScore.textContent = `Computer: 0`;
+                tieScore.textContent = `Ties: 0`;
+            }
+            computerScore.textContent = `Computer: ${scoreNow}`;
+        }
+        else { // tie
+            let scoreNow = parseInt(tieScore.textContent.slice(-1)); 
+            scoreNow += 1;
+            tieScore.textContent = `Ties: ${scoreNow}`;
+        }
     });
 });
-
-// score-keeping
-const playerScore = document.querySelector('div.player');
-const computerScore = document.querySelector('div.computer');
-
-playerScore.textContent = 'Player: 0';
-computerScore.textContent = 'Computer: 0';
 
 // game();
 
